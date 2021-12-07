@@ -1,0 +1,21 @@
+.quantity-button {
+    position: absolute; 
+    bottom: 12px; 
+    right: 12px;
+    font-size: 28px;
+}
+
+.searchbar {
+    color: var(--ion-color-primary);
+    /*border-color: var(--ion-color-secondary);
+    border-style: solid;*/
+    border-radius: 32px;
+    background: #fff;
+    height: 62px;
+    --box-shadow: none;
+}
+
+.searchbar-container {
+    width: 100%;
+    padding: 14px;
+}

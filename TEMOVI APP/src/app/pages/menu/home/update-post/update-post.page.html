@@ -1,0 +1,191 @@
+<!-- HEADER -->
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="closeView()">
+        <ion-icon slot="icon-only" name='close' color='light' style="font-size: 25px;"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>EDITAR POST</ion-title>
+  </ion-toolbar>
+  <div class="cool-line"></div>
+</ion-header>
+
+<ion-content class="cool-content">
+
+  <div *ngIf="viewReady">
+    <ion-card class="cool-card sub-card">
+      <ion-item color="tertiary" lines="none">
+        <ion-title class="cool-title">General</ion-title>
+        <ion-icon slot="end" name="options" color="primary"></ion-icon>
+      </ion-item>
+  
+      <div class="cool-line"></div>
+  
+      <!-- IMAGENES -->
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="12" class="ion-text-center">
+            <ion-grid *ngIf="postRealTime.images.length <= 0">
+              <ion-row>
+                <ion-col size="12">
+                  <ion-input 
+                  type="file" 
+                  accept="image/*"  
+                  style="position: absolute; opacity: 0;" 
+                  (change)="chooseImages($event)" 
+                  required></ion-input>
+  
+                  <ion-card 
+                  *ngIf="selectedImages !== null"
+                  class="category-bar" 
+                  button>
+                    <ion-text>Subir Imagen</ion-text>
+                  </ion-card>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+  
+            <div *ngIf="!isImageUploaded() && viewReady">
+              <img src="../assets/images/add.png" height="100px" style="display: inline;">
+            </div>
+          </ion-col>
+  
+          <div *ngIf="isImageUploaded() && viewReady">
+            <ion-grid>
+              <ion-row class="ion-align-items-center">
+                <ion-col size="12" class="ion-text-center" style="margin: 0; padding: 0;" *ngFor="let image of postRealTime.images">
+                  <ion-card class="cool-card sub-card-input" style="padding-bottom: 0;" (click)="imageOptions({}, image)">
+                    <img [src]="image">
+                  </ion-card>
+                </ion-col>
+                <ion-col size="4" class="ion-text-center" style="margin: 0; padding: 0;" *ngFor="let image of newImages">
+                  <ion-card class="cool-card sub-card-input" style="padding-bottom: 0;">
+                    <img src="../assets/images/upload.png">
+                    <div class="spinner-container">
+                      <ion-spinner class="spinner" color="primary"></ion-spinner>
+                    </div>
+                  </ion-card>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+        </ion-row>
+      </ion-grid>
+  
+      <!-- TITULO -->
+      <ion-item lines="none">
+        <ion-label>Titulo:</ion-label>
+        <ion-icon slot="end" name="create" color="secondary"></ion-icon>
+      </ion-item>
+    
+      <ion-card class="cool-card sub-card-input">
+        <ion-item lines="none">
+          <ion-input placeholder="Write Title" type="text" [(ngModel)]="post.title"></ion-input>
+        </ion-item>
+      </ion-card>
+    
+      <!-- CONTENIDO -->
+      <ion-item lines="none">
+        <ion-label>Contentenido:</ion-label>
+        <ion-icon slot="end" name="chatbox" color="secondary"></ion-icon>
+      </ion-item>
+    
+      <ion-card class="cool-card sub-card-input" style="border-radius: 8px;">
+        <ion-textarea 
+        placeholder="Write Content"
+        class="cool-text" 
+        style="white-space: pre-wrap;"
+        [(ngModel)]="post.content"
+        style="height: auto;"></ion-textarea>
+      </ion-card>
+
+      <div class="cool-line"></div>
+
+      <!-- MOSTRAR EN INICIO -->
+      <ion-item lines="none" [disabled]="post.title === '' || post.content === ''">
+        <ion-text>Anuncio</ion-text>
+        <ion-toggle [(ngModel)]="post.announcement" slot="end" color="primary"></ion-toggle>
+      </ion-item>
+
+      <ion-item lines="none" [disabled]="postRealTime.images?.length === 0">
+        <ion-text>Imagen Destacada</ion-text>
+        <ion-toggle [(ngModel)]="post.featuredImage" slot="end" color="primary"></ion-toggle>
+      </ion-item>
+    </ion-card>
+
+    <!-- LINKS -->
+    <ion-card class="cool-card">
+      <ion-item color="tertiary" lines="none">
+        <ion-title class="cool-title">Links</ion-title>
+        <ion-icon slot="end" name="options" color="primary"></ion-icon>
+      </ion-item>
+
+      <div class="cool-line"></div>
+
+      <ion-item lines="none">
+        <ion-text>Activar Link</ion-text>
+        <ion-toggle [(ngModel)]="post.activateLink" slot="end" color="primary"></ion-toggle>
+      </ion-item>
+
+      <ion-card class="cool-card" [disabled]="!post.activateLink">
+        <ion-segment color="secondary" [(ngModel)]="post.linkType">
+          <ion-segment-button class="login-off" value="product" style="color: white;">
+            <ion-label>Producto</ion-label>
+          </ion-segment-button>
+          <ion-segment-button class="login-off" value="category" style="color: white;">
+            <ion-label>Categorias</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+  
+        <!-- PRODUCTO -->
+        <div *ngIf="post.linkType === 'product'">
+          <ion-card class="cool-card sub-card-input">
+            <div *ngIf="!product" class="ion-padding">
+              <ion-button 
+              class="cool-button" shape="round" color="secondary" style="width: 100%;"
+              (click)="assignProduct()">
+                Asignar Producto
+              </ion-button>
+            </div>
+    
+            <div *ngIf="product">
+              <ion-item lines="none" (click)="assignProduct()">
+                <ion-avatar slot="start">
+                  <img [src]="product.images[0]">
+                </ion-avatar>
+                <ion-label>{{product.name}}</ion-label>
+              </ion-item>
+            </div>
+          </ion-card>
+        </div>
+  
+        <!-- CATEGORIAS -->
+        <div *ngIf="post.linkType === 'category'">
+          <ion-card class="cool-card sub-card-input">
+            <category-picker [category]="category" [subcategory]="subcategory" (categoriesChanged)="setCategories($event)"></category-picker>
+          </ion-card>
+        </div>
+
+      </ion-card>
+    </ion-card>
+
+  
+    <ion-grid class="grid">
+      <ion-row class="ion-align-items-center">
+        <ion-col size="6" class="ion-text-center">
+          <ion-button class="cool-button appointment-button" shape="round" color="secondary" (click)="deleteConfirm()">
+            Eliminar
+          </ion-button>
+        </ion-col>
+        
+        <ion-col size="6" class="ion-text-center">
+          <ion-button class="cool-button appointment-button" shape="round" color="secondary" (click)="updatePost()">
+            Guardar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+</ion-content>

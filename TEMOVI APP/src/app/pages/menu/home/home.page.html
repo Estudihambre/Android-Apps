@@ -1,0 +1,240 @@
+<!-- HEADER -->
+<!-- <ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button style="color: #fff;"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>HOME</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/menu/cart" color="light">
+        <ion-icon slot="icon-only" name="cart"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <div class="cool-line"></div>
+</ion-header> -->
+
+<ion-content class="cool-content">
+  <div class="floating-button" style="left: 0px; border-bottom-right-radius: 32px;">
+    <ion-menu-button color="light" shape="round" fill="clear">
+      <ion-icon slot="icon-only" name="cart"></ion-icon>
+    </ion-menu-button>
+  </div>
+
+  <div class="floating-button" style="right: 0px; border-bottom-left-radius: 32px;">
+    <ion-buttons slot="start">
+      <ion-button routerLink="/menu/cart" color="light">
+        <ion-icon slot="icon-only" name="cart"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </div>
+
+  <!-- PORTADA -->
+  <ion-card class="animate__animated animate__fadeInLeft cool-card" style="border-style: none;" color="secondary">
+    <img src="../assets/images/Logo.png" class="full-image" style="object-fit: cover; height: 240px;">
+</ion-card>  
+<div class="cool-line"></div> 
+
+  <!-- TAB SELECTION -->
+  <!-- <ion-segment color="secondary" [(ngModel)]="selectedTab">
+    <ion-segment-button class="login-off" value="home" style="color: white;">
+      <ion-label>Inicio</ion-label>
+    </ion-segment-button>
+    <ion-segment-button class="login-off" value="blog" style="color: white;">
+      <ion-label>Novedades</ion-label>
+    </ion-segment-button>
+  </ion-segment> -->
+
+  <!-- HOME SECTION -->
+  <div *ngIf="selectedTab == 'home'">
+
+    <!-- ANUNCIOS -->
+    <ion-card class="cool-card sub-card" *ngIf="!postsReady">
+      <ion-item>
+        <ion-progress-bar type="indeterminate" color="secondary"></ion-progress-bar>
+      </ion-item>
+    </ion-card>
+
+    <ion-card class="animate__animated animate__fadeInUp cool-secondary-card" *ngIf="getAnnouncements().length > 0">
+      <ion-slides pager="true" [options]="data.sliderOptions(true, 4)">
+        <ion-slide *ngFor="let announcement of getAnnouncements()" style="height: 100%;">
+          <div style="margin-bottom: 48px;">
+            <ion-item>
+              <ion-text class="cool-secondary-title">{{announcement.title}}</ion-text>
+              <!-- <ion-badge *ngIf="post.sale !==''" slot="end" color="danger" style="font-size: 18px;">{{post.sale}}</ion-badge> -->
+            </ion-item>
+        
+            <ion-item lines="none">
+              <ion-card-content [innerHtml]="announcement.content" style="color: black;"></ion-card-content>
+            </ion-item>
+          </div>
+        </ion-slide>
+      </ion-slides>
+    </ion-card>
+
+    <!-- SLIDER -->
+    <ion-card class="animate__animated animate__fadeInRight cool-card">
+      <ion-slides pager="true" [options]="slideOpts" autoplay="true" loop="true" class="slider">
+        <ion-slide *ngFor="let image of slider">
+          <img [src]="image" style="width: 100%; height: 100%; object-fit: fill;">
+        </ion-slide>
+      </ion-slides>
+    </ion-card>
+
+    <!-- DESCRIPCION -->
+    <ion-card class="animate__animated animate__fadeInLeft cool-card">
+      <ion-item lines="none">
+        <ion-icon slot="end" name="book" color="primary"></ion-icon>
+        <ion-title>Acerca de nosotros</ion-title>
+      </ion-item>
+
+      <div class="cool-line"></div>
+
+      <ion-item lines="none">
+        <ion-card-content>
+          Somos una empresa dedicada a 
+          la renta de mobiliario y equipo 
+          especializado para entretener
+          a tus invitados en las fiestas
+          que organices.
+          <br>
+          <br>
+          Contamos con más de 6 años 
+          de experiencia. Asi que puedes 
+          confiar en nosotros como tu 
+          futuro proveedor.
+          <br>
+          <br>
+        </ion-card-content>
+      </ion-item>
+    </ion-card>
+
+    <!-- SERVICIOS -->
+    <!-- <ion-card class="animate__animated animate__fadeInRight cool-card">
+      <img src="../assets/images/servicios.jfif" class="full-image">
+
+      <ion-item lines="none">
+        <ion-icon slot="end" name="list" color="#fff"></ion-icon>
+        <ion-title>Services</ion-title>
+      </ion-item>
+
+      <div class="cool-line"></div>
+
+      <ion-item lines="none" *ngFor="let service of d.homeServices">
+        <ion-icon slot="start" name="radio-button-on" color="#fff" style="font-size: 16px;"></ion-icon>
+        <ion-text>
+          {{service}}
+        </ion-text>
+      </ion-item>
+    </ion-card> -->
+
+    <!-- HORARIO -->
+    <ion-card class="cool-card">
+      <ion-item lines="none" color="secondary">
+        <ion-icon slot="end" name="calendar" color="light"></ion-icon>
+        <ion-title>HORARIO</ion-title>
+      </ion-item>
+  
+      <div class="cool-line"></div>
+  
+      <ion-grid>
+        <ion-row *ngFor="let schedule of schedules index as i">
+          <ion-col>
+            <div class="ion-text-start cool-text">
+              <ion-text>{{schedule.day}}</ion-text>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div class="ion-text-end cool-text">
+              <ion-text>{{schedule.hour}}</ion-text>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+
+    <!-- VIDEO -->
+    <!-- <ion-card class="animate__animated animate__fadeInLeft cool-card">
+      <video style="width: 100%; background-color: #1a1a1a;" controls>
+        <source src="../assets/videos/1.mp4#t=1" type="video/mp4">
+        Your browser does not support HTML5 video.
+      </video>
+    </ion-card> -->
+
+    <!-- FLYER -->
+    <!-- <ion-card class="cool-card">
+      <img src="../assets/images/f.jfif">
+    </ion-card> -->
+  </div>
+  
+
+  <!-- BLOG SECTION -->
+  <div *ngIf="selectedTab == 'blog'">
+    <ion-card class="cool-card sub-card" *ngIf="!postsReady">
+      <div class="pin" style="top: -5px;"></div>
+      <ion-item>
+        <ion-progress-bar type="indeterminate" color="secondary"></ion-progress-bar>
+      </ion-item>
+      <div class="pin" style="bottom: -5px;"></div>
+    </ion-card>
+
+    <div *ngIf="postsReady">
+      <div *ngIf="isAdmin()">
+        <ion-grid class="grid">
+          <ion-row class="ion-align-items-center">
+            <ion-col size="12" class="ion-text-center">
+              <ion-button class="cool-button" shape="round" color="secondary" (click)="createPost()">
+                Crear Post
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+
+      <ion-card *ngFor="let post of getPosts()" class="cool-card" (click)="viewPost(post)">
+
+        <div *ngIf="isPostEmpty(post)">
+          <ion-item lines="none" class="ion-text-center">
+            <ion-text class="cool-secondary-title">POST VACIO</ion-text>
+          </ion-item>
+        </div>
+
+        <div style="width: 100%;">
+          <div *ngIf="post.images.length > 0">
+            <img defaultImage="../assets/images/loading.gif" [lazyLoad]="post.images[0]" style="width: 100%; height: 100%; object-fit: fill;">
+          </div>
+
+          <div *ngIf="post.title !== '' && post.content !== ''" style="margin-bottom: 32px;">
+            <ion-item lines="none">
+              <ion-text class="cool-secondary-title">{{post.title}}</ion-text>
+              <!-- <ion-badge *ngIf="post.sale !==''" slot="end" color="danger" style="font-size: 18px;">{{post.sale}}</ion-badge> -->
+            </ion-item>
+  
+            <div class="cool-line"></div>
+        
+            <ion-item lines="none">
+              <ion-card-content [innerHtml]="post.content"></ion-card-content>
+            </ion-item>
+          </div>
+        </div>
+
+      </ion-card>
+
+      <ion-infinite-scroll threshold="60px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content class="loading-spinner" loadingSpinner="crescent">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+
+      <div 
+      class="animate__animated animate__fadeInUp ion-text-center" 
+      style="padding: 0 25% 0 25%; margin-top: 16px; margin-bottom: 32px;"
+      *ngIf="allDataLoaded">
+        <ion-button class="cool-button" shape="round" color="secondary" (click)="scrollToTop()">
+          Ir al Inicio
+          <ion-icon slot="end" name="arrow-up"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+  </div>
+
+</ion-content>
