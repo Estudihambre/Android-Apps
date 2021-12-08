@@ -1,0 +1,134 @@
+<!-- HEADER -->
+<ion-header class="ion-no-border">
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-menu-button style="color: #fff;"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>CONTACTO</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/menu/cart" color="light">
+        <ion-icon slot="icon-only" name="cart"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <div class="cool-line"></div>
+</ion-header>
+
+<ion-content class="cool-content">
+
+  <!-- TELEFONOS -->
+  <ion-card class="animate__animated animate__fadeInLeft cool-card">
+    <ion-item color="secondary">
+      <ion-icon slot="end" name="call" color="light"></ion-icon>
+      <ion-title style="color:#fff;">Telefono</ion-title>
+    </ion-item>
+
+    <div class="cool-line"></div>
+
+    <ion-grid color="secondary">
+      <ion-row class="ion-align-items-center">
+        <!-- NUMEROS -->
+        <ion-col class="ion-text-center" size="12">
+          <ion-button class="cool-button" shape="round" color="primary" lines="none" (click)="callConfirm(6643335799)">
+            <div class="cool-text">
+              <ion-text style="color:#fff;">6643335799</ion-text>
+            </div>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+  <!-- DIRECCION -->
+  <ion-card class="animate__animated animate__fadeInRight cool-card">
+    <ion-item lines="none" color="secondary">
+      <ion-icon slot="end" name="locate" color="#fff"></ion-icon>
+      <ion-title style="color: #fff;">Direccion</ion-title>
+    </ion-item>
+    <div class="cool-line"></div>
+    <ion-item lines="none" color="primary">
+      <ion-card-content style="color: #fff;">
+        Santa Fe 3ra. Seccion, 22654 Portico de San Antonio, B.C.
+      </ion-card-content>
+    </ion-item>
+  </ion-card>
+
+  <!-- MAPA -->
+  <ion-card  class="animate__animated animate__fadeInLeft cool-card">
+    <ion-item lines="none" color="secondary">
+      <ion-icon slot="end" name="location" color="light"></ion-icon>
+      <ion-title style="color: #fff;">Localización</ion-title>
+    </ion-item>
+
+    <div class="cool-line"></div>
+    
+    <iframe style="width: 100%; height: 300px;"
+    src= 'https://maps.google.com/maps?q=TEMOVI&t=&z=15&ie=UTF8&iwloc=&output=embed'
+    frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+  <div
+    style="position: absolute;width: 80%;bottom: 10px;left: 0;right: 0;margin-left: auto;margin-right: auto;color: #000;text-align: center;">
+    <small style="line-height: 1.8;font-size: 2px;background: #fff;">
+      Map by <a href="https://www.googlemapsembed.net/" rel="nofollow">Embed Google Maps</a>
+    </small>
+  </div>
+  <style>
+    #gmap_canvas img {
+      max-width: none !important;
+      background: none !important
+    }
+  </style>
+</ion-card >
+<!-- Embed code -->
+<script type="text/javascript">(new Image).src = "//googlemapsembed.net/get?r" + escape(document.referrer);</script>
+<script type="text/javascript" src="https://googlemapsembed.net/embed"></script>
+<!-- END CODE -->
+
+  <!-- REDES SOCIALES -->
+  <ion-card class="animate__animated animate__fadeInRight cool-card">
+    <ion-item lines="none" color="secondary">
+      <ion-icon slot="end" name="share-social" color="light"></ion-icon>
+      <ion-title style="color: #fff;">Redes Sociales</ion-title>
+    </ion-item>
+  </ion-card>
+  <ion-card class="cool-card" color="secondary">
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col class="ion-text-center" size="12">
+          <ion-button class="cool-button" shape="round" fill="outline" lines="none" (click)="openLink('https://www.facebook.com/profile.php?id=100010632073921')">
+            <ion-icon slot="start" name="logo-facebook" color="light"></ion-icon>
+            <div class="cool-text" style="color: #fff;">
+              <ion-text>Brincolines Temovi</ion-text>
+            </div>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col class="ion-text-center" size="12">
+          <ion-button class="cool-button" shape="round" fill="outline" lines="none" (click)="openLink('https://www.instagram.com/arathoh/')">
+            <ion-icon slot="start" name="logo-instagram" color="light"></ion-icon>
+            <div class="cool-text" style="color: #fff;">
+              <ion-text>Brincolines Temovi</ion-text>
+            </div>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col class="ion-text-center" size="12">
+          <ion-button class="cool-button" shape="round" fill="outline" lines="none" (click)="openLink('https://www.google.com/maps/place/Brincolines+Temovi,+Santa+Fe+3ra.+Seccion,+22654+Portico+de+San+Antonio,+B.C./@32.4345049,-117.0259585,15z/data=!4m2!3m1!1s0x80d93718d6f66efb:0xad1a5aadf6c92503')">
+            <ion-icon slot="start" name="logo-google" color="light"></ion-icon>
+            <div class="cool-text" style="color: #fff;">
+              <ion-text>Brincolines Temovi</ion-text>
+            </div>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </ion-card>
+</ion-content>

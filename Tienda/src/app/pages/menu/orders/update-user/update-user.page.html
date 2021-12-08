@@ -1,0 +1,146 @@
+<!-- HEADER -->
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="closeView()">
+        <ion-icon slot="icon-only" name='close' color='light' style="font-size: 25px;"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>MODIFICAR USUARIO</ion-title>
+  </ion-toolbar>
+  <div class="cool-line"></div>
+</ion-header>
+
+<ion-content class="cool-content">
+
+  <ion-grid style="margin-top: 32px;">
+    <ion-row class="ion-align-items-center">
+      <ion-col size="12" class="ion-text-center">
+        <div class="avatar">
+          <img src="../assets/images/user.png">
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid> 
+
+  <ion-card class="cool-card sub-card" style="padding: 32px 0 32px 0;">
+
+    <!-- USERNAME -->
+    <ion-item lines="none">
+      <ion-icon slot="start" name="person" color="primary"></ion-icon>
+      <ion-label>{{userData.username}}</ion-label>
+    </ion-item>
+
+    <div class="cool-line"></div>
+
+    <!-- EMAIL -->
+    <ion-item lines="none">
+      <ion-icon slot="start" name="mail" color="primary"></ion-icon>
+      <ion-label>{{userData.email}}</ion-label>
+    </ion-item>
+
+    <div class="cool-line"></div>
+  
+    <!-- PHONES -->
+    <ion-item lines="none">
+      <ion-icon slot="start" name="call" color="primary"></ion-icon>
+      <ion-label>{{userData.phone}}</ion-label>
+
+      <ion-grid class="grid">
+        <ion-row class="ion-align-items-center">
+          <ion-col class="ion-text-center" size="12">
+            <ion-toolbar color="tertiary">
+              <ion-buttons slot="end">
+                <ion-button 
+                color="primary" 
+                shape="round" 
+                (click)="callUserConfirm()" 
+                style="border: 2px solid black; border-radius: 24px;"
+                [disabled]="userData.phone === ''">
+                  <ion-icon slot="icon-only" name="call"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <div class="cool-line"></div>
+
+    <!-- ADDRESS -->
+    <ion-item lines="none">
+      <ion-icon slot="start" name="home" color="primary"></ion-icon>
+      <ion-label>{{'Direccion: '+ getAddressText()}}</ion-label>
+    </ion-item>
+
+    <div class="cool-line"></div>
+
+    <!-- LOCATION -->
+    <ion-grid class="grid" style="padding-top: 0px; margin-top: 32px; margin-bottom: 32px;">
+      <ion-row class="ion-align-items-center">
+        <ion-col size="12" class="ion-text-center">
+          <ion-button class="cool-button" shape="round" color="secondary" [disabled]="!isRoutingAvailable()" (click)="trackOptions($event)">
+            Ver Ubicacion
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid> 
+
+    <div class="cool-line"></div>
+
+    <div *ngIf="isAdmin()">
+      <!-- ROLE -->
+      <ion-item lines="none">
+        <ion-icon slot="start" name="flame" color="primary"></ion-icon>
+        <ion-label>{{'Rol: '+ getRoleText()}}</ion-label>
+      </ion-item>
+
+      <div class="cool-line"></div>
+
+      <!-- CANCEL -->
+      <ion-item lines="none">
+        <ion-icon slot="start" name="close" color="primary"></ion-icon>
+        <ion-text>{{'Cancelaciones: '+ userData.cancel}}</ion-text>
+      </ion-item>
+
+      <div class="cool-line"></div>
+
+      <!-- ORDER COUNT -->
+      <ion-item lines="none">
+        <ion-icon slot="start" name="list" color="primary"></ion-icon>
+        <ion-text>{{'Pedidos Creados: '+ userData.orderCount}}</ion-text>
+      </ion-item>
+
+      <div class="cool-line"></div>
+
+      <!-- ALLOW ORDERS -->
+      <ion-item lines="none">
+        <ion-icon slot="start" name="key" color="primary"></ion-icon>
+        <ion-text>Permitir Pedidos</ion-text>
+        <ion-toggle [(ngModel)]="allowOrders" slot="end" color="secondary"></ion-toggle>
+      </ion-item>
+  
+      <div class="cool-line"></div>
+    
+      <!-- DELIVERY -->
+      <ion-item lines="none">
+        <ion-icon slot="start" name="rocket" color="primary"></ion-icon>
+        <ion-text>Cuenta de Entrega</ion-text>
+        <ion-toggle [(ngModel)]="delivery" slot="end" color="secondary" (ionChange)="updateRole($event)"></ion-toggle>
+      </ion-item>
+
+      <div class="cool-line"></div>
+
+      <ion-grid class="grid" style="padding-top: 0px; margin-top: 32px;">
+        <ion-row class="ion-align-items-center">
+          <ion-col size="12" class="ion-text-center">
+            <ion-button class="cool-button" shape="round" color="secondary" (click)="saveUserChanges()">Guardar Cambios</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+  </ion-card>
+  
+</ion-content>

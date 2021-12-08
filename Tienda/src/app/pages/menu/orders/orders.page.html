@@ -1,0 +1,83 @@
+<!-- HEADER -->
+<ion-header class="ion-no-border">
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-menu-button style="color: #fff;"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>PEDIDOS</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/menu/cart" color="light">
+        <ion-icon slot="icon-only" name="cart"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <div class="cool-line"></div>
+</ion-header>
+
+<ion-content class="cool-content">
+
+  <!-- SEARCHBAR -->
+  <searchbar [text]="searchbar" (textChanged)="search($event)"></searchbar>
+
+  <div *ngIf="viewReady">
+
+    <ion-item lines="none" color="primary">
+      <ion-title class="ion-text-center cool-title" style="color: white;">{{selectedTab.text}}</ion-title>
+      <ion-icon name="arrow-back" style="position: absolute; left: 0px;" color="light" button (click)="previousTab()"></ion-icon>
+      <ion-icon name="arrow-forward" style="position: absolute; right: 16px;" color="light" button (click)="nextTab()"></ion-icon>
+    </ion-item>
+
+    <div class="cool-line"></div>
+
+    <ion-card class="animate__animated animate__fadeInRight cool-card" style="padding: 16px 0 16px 0;" *ngIf="getOrdersByState(selectedTab.state).length === 0">
+      <ion-item lines="none">
+        <ion-icon slot="start" name="information-circle" color="primary"></ion-icon>
+        <ion-label class="cool-text" color="dark">No hay pedidos {{selectedTab.text}}</ion-label>
+      </ion-item>
+    </ion-card>
+
+    <ion-card 
+    class="animate__animated animate__fadeInRight cool-card"
+    *ngFor="let order of getOrdersByState(selectedTab.state) index as i">
+      <ion-toolbar class="ion-padding cool-text" lines="none">
+        <ion-text>{{order.user.username}}</ion-text> <br>
+        <ion-text>{{order.user.email}}</ion-text> <br>
+        <ion-text style="color: black;">Pedido #{{order.number}}</ion-text> <br>
+        <ion-text style="color: black;">id - {{order.id}}</ion-text> <br>
+        <ion-text style="color: black;">Total: {{order.totalPrice}} €</ion-text>
+
+        <ion-icon class="quantity-button" color="primary" name="options" (click)="updateOrder(order)"></ion-icon>
+        <ion-icon *ngIf="isDelivery()" class="quantity-button" color="primary" style="bottom: 48px;" name="person-circle" (click)="getUser(order.user.id)"></ion-icon>
+      </ion-toolbar>
+
+      <!-- <div class="cool-line"></div>
+
+      <ion-grid class="grid">
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-center">
+            <div (click)="acceptOrder(order)">
+              <ion-icon class="view-button" name="checkmark-circle" color="primary"></ion-icon>
+            </div>
+          </ion-col>
+          <ion-col size="3" class="ion-text-center">
+            <div (click)="rejectOrderConfirm(order)">
+              <ion-icon class="view-button" name="close-circle" color="primary"></ion-icon>
+            </div>
+          </ion-col>
+          <ion-col size="3" class="ion-text-center">
+            <div (click)="getUser(order.user.id)">
+              <ion-icon class="view-button" name="person-circle" color="primary"></ion-icon>
+            </div>
+          </ion-col>
+          <ion-col size="3" class="ion-text-center">
+            <div (click)="updateOrder(order)">
+              <ion-icon class="view-button" name="options" color="primary"></ion-icon>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid> -->
+
+    </ion-card>
+
+  </div>
+</ion-content>

@@ -1,0 +1,7 @@
+{
+  "name": "RoyalStyling",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

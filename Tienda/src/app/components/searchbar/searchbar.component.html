@@ -1,0 +1,10 @@
+<div class="searchbar-container">
+  <ion-searchbar 
+  [(ngModel)]="text"
+  class="searchbar" 
+  showCancelButton="focus" 
+  placeholder="Buscar" 
+  animated cancelButtonIcon="close"
+  debounce="25"
+  (ionChange)="emit()"></ion-searchbar>
+</div>

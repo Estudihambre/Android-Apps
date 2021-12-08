@@ -1,0 +1,81 @@
+<!-- HEADER -->
+<ion-header class="ion-no-border">
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-menu-button style="color: #fff;"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>CUENTA</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/menu/cart" color="light">
+        <ion-icon slot="icon-only" name="cart"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <div class="cool-line"></div>
+</ion-header>
+
+<ion-content class="cool-content">
+
+  <div class="animate__animated animate__fadeInLeft" *ngIf="userReady">
+
+    <ion-card class="animate__animated animate__fadeInLeft cool-card">
+      <ion-item lines="none" color="secondary">
+        <ion-icon slot="end" name="person" color="light"></ion-icon>
+        <ion-title style="color: #fff;" class="ion-text-center">Osbaldo Valdez</ion-title>
+      </ion-item>
+    </ion-card>
+
+    <ion-grid style="margin-top: auto;">
+      <ion-row class="ion-align-items-center">
+        <ion-col size="12" class="ion-text-center">
+          <div class="avatar">
+            <img src="../assets/images/user.png">
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+        <div>
+            <img src="../assets/images/estrellas.png" class="center"/>  
+        </div>
+
+    <ion-card class="animate__animated animate__fadeInLeft cool-card">
+      <ion-item lines="none" color="secondary">
+        <ion-item lines="none" color="secondary"></ion-item>
+        <img src="../assets/images/Cuentamen.png">
+      </ion-item>
+    </ion-card>
+
+    <ion-row class="ion-align-items-center">
+      <ion-col size="12" class="ion-text-center">
+        <ion-button class="cool-button" shape="round" color="secondary" routerLink="/menu/orders">
+          <ion-icon slot="start" name="reader" color="light"></ion-icon>
+          Historial
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-card class="animate__animated animate__fadeInLeft cool-card">
+      <ion-item color="secondary">
+        <ion-icon slot="end" name="folder-open" color="light"></ion-icon>
+        <ion-title style="color:#fff;">Pedidos Recientes</ion-title>
+      </ion-item>
+    </ion-card>
+  </div>
+
+  <div>
+  <ion-button routerLink="/menu/orders" class="SILLA">
+    <img src="../assets/images/p1.png" >
+  </ion-button>
+</div>
+<div>
+  <ion-button routerLink="/menu/orders" class="MESA">
+    <img src="../assets/images/p2.png" >
+  </ion-button>
+</div>
+<div>
+  <ion-button routerLink="/menu/orders" class="DESPEGABLE">
+    <img src="../assets/images/p3.png" >
+  </ion-button>
+</div>
+</ion-content>

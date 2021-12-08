@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "slamart": {
+      "hosting": {
+        "app": [
+          "slamart"
+        ]
+      }
+    }
+  }
+}

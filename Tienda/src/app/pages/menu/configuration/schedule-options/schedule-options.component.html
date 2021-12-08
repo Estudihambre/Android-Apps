@@ -1,0 +1,53 @@
+<ion-grid>
+  <ion-row class="ion-align-items-center">
+    <ion-col class="ion-text-center" size="12">
+      <ion-item lines="none">
+        <ion-text>Dia Activo</ion-text>
+        <ion-toggle [(ngModel)]="day.active" slot="end" color="primary"></ion-toggle>
+      </ion-item>
+
+      <div class="cool-line"></div>
+
+      <ion-item lines="none">
+        <ion-text class="cool-text">Hora Inicial (Hora, Minutos)</ion-text>
+        <ion-icon slot="end" name="calendar" color="#fff"></ion-icon>
+      </ion-item>
+
+      <ion-range class="cool-range" min="0" max="24" step="1" snaps="true" pin="true" [(ngModel)]="day.time.start.hour" color="secondary">
+        <ion-text class="cool-text" slot="end">{{day.time.start.hour}}</ion-text>
+      </ion-range>
+
+      <ion-range class="cool-range" min="0" max="59" step="1" snaps="true" pin="true" [(ngModel)]="day.time.start.minutes" color="secondary">
+        <ion-text class="cool-text" slot="end">{{day.time.start.minutes}}</ion-text>
+      </ion-range>
+
+      <div class="cool-line"></div>
+
+      <ion-item lines="none">
+        <ion-text class="cool-text">Hora Final (Hora, Minutos)</ion-text>
+        <ion-icon slot="end" name="calendar" color="#fff"></ion-icon>
+      </ion-item>
+
+      <ion-range class="cool-range" min="0" max="24" step="1" snaps="true" pin="true" [(ngModel)]="day.time.end.hour" color="secondary">
+        <ion-text class="cool-text" slot="end">{{day.time.end.hour}}</ion-text>
+      </ion-range>
+
+      <ion-range class="cool-range" min="0" max="59" step="1" snaps="true" pin="true" [(ngModel)]="day.time.end.minutes" color="secondary">
+        <ion-text class="cool-text" slot="end">{{day.time.end.minutes}}</ion-text>
+      </ion-range>
+
+       <!-- <ion-range 
+        mode="md" 
+        class="range" 
+        dualKnobs="true" 
+        min="0" max="24" 
+        step="1" 
+        snaps="true" 
+        pin="true" 
+        [value]="{lower: day.start, upper: day.finish}" 
+        (ionChange)="rangeChange($event)" 
+        color="secondary">
+      </ion-range> -->
+    </ion-col>
+  </ion-row>
+</ion-grid>
